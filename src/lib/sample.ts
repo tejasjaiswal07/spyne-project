@@ -54,8 +54,7 @@ export function getSampleAnalysis(): AnalysisResult {
     url: SAMPLE_DEALER_URL,
     analyzedAt: new Date().toISOString(),
     mode: "sample",
-    scrapeWarning:
-      "Sample dealership used. This is a realistic demo result for Riverside Ford, a mid-size rooftop with solid inventory pages but weak always-on engagement.",
+    scrapeWarning: "Sample dealer. Demo result — not a live crawl.",
     scores: {
       categories: [
         { key: "leadCapture", label: "Lead Capture", score: 18, max: 30 },
