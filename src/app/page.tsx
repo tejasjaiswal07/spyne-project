@@ -1,69 +1,117 @@
-import Image from "next/image";
+import { AnalyzeForm } from "@/components/AnalyzeForm";
+import { Footer, Header } from "@/components/SiteChrome";
+
+const steps = [
+  {
+    n: "01",
+    title: "Enter your dealership URL",
+    body: "Use any public rooftop site. We only read what a shopper can already see.",
+  },
+  {
+    n: "02",
+    title: "We analyze the digital buying experience",
+    body: "Lead capture, inventory presentation, conversion paths, and conversational readiness.",
+  },
+  {
+    n: "03",
+    title: "Get your score and biggest opportunities",
+    body: "A 0–100 readiness score, the top revenue leaks, and where Spyne could help.",
+  },
+];
+
+const pillars = [
+  {
+    title: "Lead capture",
+    body: "Can a shopper reach you, book a visit, or start a conversation without waiting for the sales floor?",
+  },
+  {
+    title: "Inventory presentation",
+    body: "Are vehicles easy to find, consistently merchandised, and visually strong enough to hold attention?",
+  },
+  {
+    title: "Conversion",
+    body: "Is the next step obvious — test drive, finance, trade-in, or contact — on the pages that matter?",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Header />
+      <main className="flex-1">
+        <section className="mx-auto max-w-6xl px-5 pb-8 pt-16 sm:pt-24">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
+            Dealer AI Readiness Score
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <h1 className="mt-5 max-w-3xl font-serif text-4xl leading-[1.1] tracking-tight sm:text-6xl">
+            Find the biggest revenue leaks in your dealership&apos;s digital
+            buying journey.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            See where your dealership may be losing buyers before they ever
+            reach your sales team. Enter your dealership website and get a
+            quick AI-powered assessment of lead capture, inventory presentation
+            and conversion.
+          </p>
+          <div className="mt-10 max-w-2xl rounded-2xl border border-line bg-white p-4 sm:p-5">
+            <AnalyzeForm />
+          </div>
+          <p className="mt-4 max-w-2xl text-sm text-muted">
+            We analyze your dealership&apos;s digital experience across lead
+            capture, inventory presentation and conversion.
+          </p>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-5 py-16">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
+            How it works
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {steps.map((step) => (
+              <div key={step.n} className="rounded-2xl border border-line bg-white p-6">
+                <p className="text-xs font-medium text-muted">{step.n}</p>
+                <h2 className="mt-3 text-lg font-medium">{step.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-5 pb-16">
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
+            What we analyze
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {pillars.map((item) => (
+              <div key={item.title} className="border-t border-line pt-5">
+                <h2 className="text-lg font-medium">{item.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="border-t border-line">
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-16 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <h2 className="font-serif text-3xl sm:text-4xl">
+                How ready is your dealership&apos;s digital sales experience?
+              </h2>
+              <p className="mt-3 text-sm text-muted">
+                A directional score for GTM conversations — not a production
+                audit, CRM, or SEO tool.
+              </p>
+            </div>
+            <a
+              href="#dealer-url"
+              className="inline-flex h-12 items-center rounded-lg bg-accent px-5 text-sm font-medium text-white"
+            >
+              Analyze a dealership →
+            </a>
+          </div>
+        </section>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }

@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dealer AI Readiness Score
 
-## Getting Started
+A public-facing prototype that scores a car dealership's **digital buying experience** — lead capture, inventory presentation, conversion, and conversational / AI readiness — then maps the biggest gaps to Spyne products (Vini AI and Studio AI).
 
-First, run the development server:
+This is a GTM / portfolio MVP inspired by [Spyne](https://www.spyne.ai/). It is **not** a production SaaS, **not** an SEO audit, and **not** affiliated with Spyne.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Why it exists
+
+Dealership websites often lose shoppers before a salesperson ever talks to them: weak after-hours capture, buried test-drive CTAs, inconsistent inventory imagery.
+
+This tool is meant to be demoed in about 30 seconds:
+
+1. Enter a rooftop URL (or run the sample dealership)
+2. See a 0–100 Dealer AI Readiness Score
+3. Review the top revenue leaks, quick wins, and a potential Spyne fit
+
+## Tech stack
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS
+- Cheerio for lightweight HTML parsing
+- OpenAI for qualitative opportunity write-ups
+- No database, auth, billing, queues, or background workers
+
+## Architecture
+
+```
+User URL
+  → POST /api/analyze
+  → scrape homepage + up to 4 relevant internal pages (lib/scraper.ts)
+  → deterministic signals (lib/signals.ts)
+  → transparent scoring (lib/scoring.ts)
+  → LLM opportunities, with deterministic fallback (lib/ai.ts)
+  → Spyne product mapping (lib/spyneMapping.ts)
+  → results UI
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If scraping fails, the UI stays intact and offers **Try the sample dealership**. If the OpenAI key is missing or the model call fails, opportunities are generated from detected signals so the demo still works.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to run locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+cp .env.example .env.local
+# add OPENAI_API_KEY if you want live LLM copy; sample mode works without it
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+- Analyze a live URL, or
+- Click **Try a sample dealership** for a guaranteed demo (score 63/100)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Required | Description |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | No (fallback analysis is used) | OpenAI API key |
+| `OPENAI_MODEL` | No | Defaults to `gpt-4o-mini` |
 
-## Deploy on Vercel
+Never commit real keys. Copy `.env.example` to `.env.local`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How scoring works
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Overall score is 0–100, summed from four categories:
+
+| Category | Max |
+| --- | --- |
+| Lead Capture | 30 |
+| Inventory Experience | 25 |
+| Conversion Experience | 25 |
+| AI Readiness | 20 |
+
+Each check is `detected` (full points), `likely` (70%), `could_not_verify` (40%), or `not_detected` (0). The model does **not** calculate the score.
+
+Labels:
+
+- 0–40 Needs Attention
+- 41–60 Developing
+- 61–80 Strong
+- 81–100 Advanced
+
+## How AI analysis works
+
+The LLM receives a compact extract of crawled pages plus the deterministic signals. It returns three opportunities (evidence, severity, why it matters, recommended action, optional Spyne product). It is instructed not to invent revenue numbers or claim something is definitely missing when the crawler simply did not find it.
+
+## Limitations
+
+- Crawls a handful of public pages only — not a full site audit
+- Many dealer platforms block bots; sample mode exists for that
+- Chat widgets loaded only via JavaScript may be missed
+- Scores are directional, not a formal operational assessment
+- Spyne mapping is a GTM hypothesis, not a pricing or ROI calculator
+
+## Deploy to Vercel
+
+1. Push this repo to GitHub
+2. Import the project in [Vercel](https://vercel.com/new)
+3. Set `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`) in Project Settings → Environment Variables
+4. Deploy
+
+Vercel-ready: Next.js App Router, no extra server, `maxDuration` set to 60s on `/api/analyze`.
