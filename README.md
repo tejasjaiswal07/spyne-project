@@ -2,7 +2,7 @@
 
 A public-facing prototype that scores a car dealership's **digital buying experience** — lead capture, inventory presentation, conversion, and conversational / AI readiness — then maps the biggest gaps to Spyne products (Vini AI and Studio AI).
 
-This is a GTM / portfolio MVP inspired by [Spyne](https://www.spyne.ai/). It is **not** a production SaaS, **not** an SEO audit, and **not** affiliated with Spyne.
+This is a GTM / portfolio MVP. It is **not** a production SaaS, **not** an SEO audit, and **not** affiliated with Spyne.
 
 ## Why it exists
 
