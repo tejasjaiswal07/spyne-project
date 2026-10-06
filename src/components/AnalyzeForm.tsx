@@ -36,26 +36,24 @@ export function AnalyzeForm({ compact = false }: { compact?: boolean }) {
           placeholder="https://yourdealership.com"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="h-12 flex-1 rounded-lg border border-line bg-white px-4 text-[15px] outline-none transition focus:border-accent"
+          className="h-12 flex-1 rounded-lg border border-line bg-white px-4 text-[15px] outline-none focus:border-accent"
         />
         <button
           type="submit"
-          className="h-12 rounded-lg bg-accent px-5 text-sm font-medium text-white transition hover:bg-[#0f2c33]"
+          className="h-12 rounded-lg bg-accent px-5 text-sm font-medium text-white"
         >
-          Analyze Dealership →
+          Analyze
         </button>
       </form>
       {error ? <p className="mt-2 text-sm text-red-700">{error}</p> : null}
-      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted">
+      <p className="mt-4 text-sm">
         <Link
           href="/results?sample=1"
           className="font-medium text-accent underline-offset-4 hover:underline"
         >
-          Try a sample dealership
+          Run sample dealer
         </Link>
-        <span className="hidden h-3 w-px bg-line sm:block" />
-        <p>No login required. Takes about 15 seconds.</p>
-      </div>
+      </p>
     </div>
   );
 }

@@ -14,9 +14,8 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Dealer AI Readiness Score",
-  description:
-    "Find the biggest revenue leaks in your dealership's digital buying journey. Assess lead capture, inventory presentation and conversion.",
+  title: "Dealer AI Readiness",
+  description: "Paste a dealer URL. Get a 0–100 score and the biggest website leaks.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
