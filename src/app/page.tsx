@@ -6,14 +6,12 @@ export default function Home() {
     <>
       <Header />
       <main className="flex-1">
-        <section className="mx-auto max-w-2xl px-5 py-20 sm:py-28">
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Is this dealer losing buyers on the website?
-          </h1>
-          <p className="mt-4 text-base text-muted">
-            Paste a URL. Get a 0–100 score and the three biggest leaks.
+        <section className="mx-auto max-w-xl px-5 py-16">
+          <h1 className="text-2xl font-medium">Dealer website score</h1>
+          <p className="mt-2 text-sm text-muted">
+            Paste a URL. Get a 0–100 score and three leaks.
           </p>
-          <div className="mt-8 rounded-2xl border border-line bg-white p-4 sm:p-5">
+          <div className="mt-6">
             <AnalyzeForm />
           </div>
         </section>

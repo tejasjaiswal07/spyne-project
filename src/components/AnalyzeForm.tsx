@@ -36,11 +36,11 @@ export function AnalyzeForm({ compact = false }: { compact?: boolean }) {
           placeholder="https://yourdealership.com"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="h-12 flex-1 rounded-lg border border-line bg-white px-4 text-[15px] outline-none focus:border-accent"
+          className="h-10 flex-1 border border-line bg-white px-3 text-sm outline-none"
         />
         <button
           type="submit"
-          className="h-12 rounded-lg bg-accent px-5 text-sm font-medium text-white"
+          className="h-10 bg-accent px-4 text-sm text-white"
         >
           Analyze
         </button>
